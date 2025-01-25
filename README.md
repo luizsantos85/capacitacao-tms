@@ -38,6 +38,7 @@ $ php artisan key:generate
 $ php artisan migrate
 
 **acessar localhost:8000 para acessar o sistema
+**Acessar phpmyadmin localhost:8080 (user: root, senha: mesma definida no banco)
 ```
 
 ## Instalar App diretamente na maquina Caso tenha um servidor local (Apache/Nginx)
