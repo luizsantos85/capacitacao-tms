@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PanelController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -17,13 +18,13 @@ use App\Http\Controllers\UserController;
 
 Route::get('/login', [AuthController::class ,'index'])->name('login');
 Route::post('/login', [AuthController::class ,'store'])->name('login.store');
-Route::post('/logout', [AuthController::class ,'logout'])->name('logout');
 
 Route::get('/create-user', [UserController::class ,'index'])->name('user');
 Route::post('/create-user', [UserController::class ,'store'])->name('user.store');
 
 Route::prefix('panel')->middleware(['auth'])->group(function(){
-    Route::get('/', function(){
-        return view('panel.index');
-    })->name('panel.index');
+    Route::get('/', [PanelController::class, 'index'])->name('panel.index');
+    Route::post('/logout', [AuthController::class ,'logout'])->name('logout');
+
+
 });

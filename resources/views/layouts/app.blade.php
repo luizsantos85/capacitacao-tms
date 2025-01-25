@@ -12,9 +12,7 @@
 
 <body>
 
-    <div class="container">
-        @yield('content')
-    </div>
+    @yield('content')
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
