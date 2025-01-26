@@ -20,7 +20,7 @@
 
         <div class="form-group">
             <label for="status">Concluída?</label>
-            <input type="checkbox" id="status" name="status" value="1" {{ isset($task) && $task->status ? 'checked' : ''
+            <input type="checkbox" id="status" name="status" value="0" {{ isset($task) && $task->status ? 'checked' : ''
             }}>
         </div>
 

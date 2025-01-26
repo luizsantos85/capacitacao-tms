@@ -33,7 +33,6 @@ class StoreUpdateTaskRequest extends FormRequest
         return [
             'title.required' => 'O campo Título é obrigatório.',
             'description.required' => 'O campo Descrição é obrigatório.',
-
         ];
     }
 }

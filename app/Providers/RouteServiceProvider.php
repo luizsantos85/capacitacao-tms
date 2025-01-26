@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Task;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const HOME = '/panel';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
@@ -35,6 +36,13 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
+        });
+
+        
+        Route::bind('task', function ($value) {
+            return Task::where('id', $value)
+                ->where('user_id', auth()->id()) // Garante que pertence ao usuário autenticado
+                ->firstOrFail();
         });
     }
 }
