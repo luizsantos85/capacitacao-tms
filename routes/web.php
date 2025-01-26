@@ -17,6 +17,10 @@ use App\Http\Controllers\UserController;
 |
 */
 
+Route::get('/', function () {
+    return redirect('/panel');
+});
+
 Route::get('/login', [AuthController::class ,'index'])->name('login');
 Route::post('/login', [AuthController::class ,'store'])->name('login.store');
 

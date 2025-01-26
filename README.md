@@ -38,7 +38,7 @@ $ php artisan key:generate
 $ php artisan migrate
 
 **acessar localhost:8000 para acessar o sistema
-**Acessar phpmyadmin localhost:8080 (user: root, senha: mesma definida no banco)
+**Acessar phpmyadmin localhost:8080 (user: mesmo definido no env, senha: mesma definida no env)
 ```
 
 ## Instalar App diretamente na maquina Caso tenha um servidor local (Apache/Nginx)
@@ -60,6 +60,11 @@ $ php artisan key:generate
 **Gerar as migrations do banco
 $ php artisan migrate
 
+**Se mudar as configuracoes de cache para file no .env
+
+
+**Rodar o projeto
+$ php artisan serve
 
 **acessar localhost:(porta selecionada) para acessar o sistema
 ```
