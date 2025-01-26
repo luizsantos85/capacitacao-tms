@@ -20,14 +20,15 @@
 
         <div class="col-md-12 mt-4 p-0">
             <form class="form-group d-flex align-items-center justify-content-between" action="{{ route('tasks.search') }}" method="POST">
+                @csrf
                 <div class="form-group mr-2 col-md-8 p-0">
-                    <input type="text" class="form-control mr-2" placeholder="Pesquisar tarefa" name="searchTitle">
+                    <input type="text" class="form-control mr-2" placeholder="Pesquisar tarefa" name="search" value="{{ $dataForm['search'] ?? '' }}">
                 </div>
                 <div class="form-group mr-2 col-md-3 p-0">
-                    <select class="form-control" name="filterStatus">
+                    <select class="form-control" name="status">
                         <option value="" disabled selected>Filtrar por status</option>
-                        <option value="0">Pendente</option>
-                        <option value="1">Concluído</option>
+                        <option value="0" {{(isset($dataForm['status']) && $dataForm['status'] == 0) ? 'selected' : '' }} >Pendente</option>
+                        <option value="1" {{(isset($dataForm['status']) && $dataForm['status'] == 1) ? 'selected' : '' }}>Concluído</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -67,7 +68,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="6" class="text-center">Nenhuma tarefa cadastrada.</td>
+                        <td colspan="6" class="text-center">Nenhuma tarefa {{isset($dataForm) ? 'encontrada' : 'cadastrada'}}.</td>
                     </tr>
                     @endforelse
                 </tbody>

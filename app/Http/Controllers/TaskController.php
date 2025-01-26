@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreUpdateTaskRequest;
 use App\Models\Task;
+use Illuminate\Http\Request;
+
 
 class TaskController extends Controller
 {
+
+    protected $totalPage = 3;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $user = auth()->user();
-        $tasks = $user->tasks()->paginate(3);
+        $tasks = $user->tasks()->paginate($this->totalPage);
 
         return view('tasks.index', compact('tasks','user'));
     }
@@ -79,5 +84,14 @@ class TaskController extends Controller
         }
 
         return response()->json(['success' => 'Deletado com sucesso'], 200);
+    }
+
+    public function search(Request $request)
+    {
+        $user = auth()->user();
+        $dataForm = $request->except('_token');
+        $tasks = (new Task)->search($dataForm, $this->totalPage);
+
+        return view('tasks.index', compact('tasks', 'user','dataForm'));
     }
 }

@@ -18,6 +18,21 @@ class Task extends Model
         return Str::limit($this->description, 100, '...');
     }
 
+    public function search($data, $totalPage)
+    {
+        $tasks = $this->when(isset($data['status']), function ($query) use ($data) {
+            return $query->where('status', $data['status']);
+        })
+        ->when($data['search'] != null, function ($query) use ($data) {
+            return $query->where('title', 'LIKE', "%{$data['search']}%")
+            ->orWhere('description', 'LIKE', "%{$data['search']}%");
+        })
+        ->where('user_id', auth()->user()->id)
+        ->paginate($totalPage);
+
+        return $tasks;
+    }
+
     // Relacionamentos
     public function user()
     {
