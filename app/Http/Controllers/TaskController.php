@@ -18,7 +18,9 @@ class TaskController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $tasks = $user->tasks()->paginate($this->totalPage);
+        $tasks = $user->tasks()
+            ->orderBy('status','asc')
+            ->paginate($this->totalPage);
 
         return view('tasks.index', compact('tasks','user'));
     }
