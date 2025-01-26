@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PanelController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -26,5 +27,10 @@ Route::prefix('panel')->middleware(['auth'])->group(function(){
     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
     Route::post('/logout', [AuthController::class ,'logout'])->name('logout');
 
+    Route::prefix('tasks')->group(function(){
+        Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
+
+
+    });
 
 });
