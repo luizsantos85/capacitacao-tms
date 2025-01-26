@@ -11,7 +11,7 @@
 <div class="row mt-3">
     <div class="col-12">
         <div class="col ml-auto p-0 text-right">
-            <a href="#" class="btn btn-outline-primary">Adicionar</a>
+            <a href="{{route('tasks.create')}}" class="btn btn-outline-primary">Adicionar</a>
         </div>
 
         <div class="d-flex col-md-12 p-0 mt-2">
@@ -38,7 +38,9 @@
                         <th scope="col">#</th>
                         <th scope="col">Título</th>
                         <th scope="col">Descrição</th>
-                        <th width="80"></th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Data de criação</th>
+                        <th width="80">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,6 +49,8 @@
                         <th scope="row">{{ $task->id }}</th>
                         <td>{{ $task->title }}</td>
                         <td>{{ $task->short_description }}</td>
+                        <td>{{ $task->status ? 'Concluída' : 'Pendente' }}</td>
+                        <td>{{ $task->created_at->format('d/m/Y') }}</td>
                         <td>
                             <a href="#" class="mr-2"><i class="bi bi-pencil text-warning"></i></a>
                             <a href="#" onclick="deleteTask({{ $task->id }})"><i class="bi bi-trash text-danger"></i></a>
@@ -54,7 +58,7 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="text-center">Nenhuma tarefa cadastrada.</td>
+                        <td colspan="6" class="text-center">Nenhuma tarefa cadastrada.</td>
                     </tr>
                     @endforelse
                 </tbody>

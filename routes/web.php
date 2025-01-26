@@ -29,6 +29,12 @@ Route::prefix('panel')->middleware(['auth'])->group(function(){
 
     Route::prefix('tasks')->group(function(){
         Route::get('/', [TaskController::class, 'index'])->name('tasks.index');
+        Route::get('/create', [TaskController::class, 'create'])->name('tasks.create');
+        Route::post('/store', [TaskController::class, 'store'])->name('tasks.store');
+        Route::get('/{task}', [TaskController::class, 'show'])->name('tasks.show');
+        Route::get('/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
+        Route::put('/{task}', [TaskController::class, 'update'])->name('tasks.update');
+        Route::get('/{task}/delete', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
 
     });

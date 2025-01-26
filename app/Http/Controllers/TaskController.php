@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUpdateTaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -23,15 +24,24 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('tasks.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUpdateTaskRequest $request)
     {
-        //
+        $user = auth()->user();
+        $dataForm = $request->all();
+        $dataForm['user_id'] = $user->id;
+
+        if (Task::create($dataForm))
+            return redirect()->route('tasks.index')
+            ->with('success', 'Cadastro realizado com sucesso.');
+        else
+            return redirect()->back()
+                ->with('error', 'Falha ao cadastrar.');
     }
 
     /**

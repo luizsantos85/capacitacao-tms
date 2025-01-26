@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -43,6 +44,13 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // Função de apoio
+    public function getFirstNameAttribute()
+    {
+        return Str::before($this->name, ' ') ?: $this->name;
+    }
+
+    // Relacionamentos
     public function tasks()
     {
         return $this->hasMany(Task::class);
